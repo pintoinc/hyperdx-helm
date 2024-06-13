@@ -9,29 +9,29 @@
 ## @param global.storageClass Global StorageClass for Persistent Volume(s)
 ##
 global:
-  imageRegistry: ''
+  imageRegistry: ""
   ## E.g.
   ## imagePullSecrets:
   ##   - myRegistryKeySecretName
   ##
   imagePullSecrets: []
-  storageClass: ''
+  storageClass: ""
 
 ## @section Common parameters
 ##
 
 ## @param kubeVersion Override Kubernetes version
 ##
-kubeVersion: ''
+kubeVersion: ""
 ## @param nameOverride String to partially override common.names.name
 ##
-nameOverride: ''
+nameOverride: ""
 ## @param fullnameOverride String to fully override common.names.fullname
 ##
-fullnameOverride: ''
+fullnameOverride: ""
 ## @param namespaceOverride String to fully override common.names.namespace
 ##
-namespaceOverride: ''
+namespaceOverride: ""
 ## @param commonLabels Labels to add to all deployed objects
 ##
 commonLabels: {}
@@ -65,13 +65,13 @@ diagnosticMode:
 
 ## @param apiKey the Hyperdx api key. TODO: If not specified, use the ingestion api key for self-instrumentation.
 ##
-apiKey: ''
+apiKey: ""
 ## @param logLevel the logging level across all Hyperdx pipeline components. Allowed values: `error`, `warn`, `info`, `http`, `verbose`, `debug`, `silly`
 ##
-logLevel: info 
+logLevel: info
 ## @param publicUrl Type A DNS record that points to the the LoadBalancer service of the API gateway (Kong)
 ##
-publicUrl: ''
+publicUrl: ""
 
 ## @section Hyperdx dashboard app Parameters
 ##
@@ -86,7 +86,7 @@ app:
   ## @param app.defaultConfig [string] Hyperdx app default configuration
   ##
   # TODO: dashboard app client side is not yet able to read envs injected at runtime. See README for details
-  defaultConfig: | 
+  defaultConfig: |
     HYPERDX_API_KEY: {{ .Values.apiKey }} 
     PORT: "8080"
     NEXT_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT: {{ .Values.publicUrl }}/collector
@@ -99,10 +99,10 @@ app:
 
   ## @param app.existingConfigmap The name of an existing ConfigMap with the default configuration
   ##
-  existingConfigmap: ''
+  existingConfigmap: ""
   ## @param app.extraConfigExistingConfigmap The name of an existing ConfigMap with extra configuration
   ##
-  extraConfigExistingConfigmap: ''
+  extraConfigExistingConfigmap: ""
 
   ## Hyperdx dashboard app image
   ## ref: https://github.com/hyperdxio/hyperdx/pkgs/container/hyperdx
@@ -116,13 +116,13 @@ app:
   image:
     registry: ghcr.io
     repository: hyperdxio/hyperdx
-    tag: 1.6.0-app
-    digest: ''
+    tag: 1.8.0-app
+    digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
     ## ref: http://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
     ##
-    pullPolicy: IfNotPresent 
+    pullPolicy: IfNotPresent
     ## Optionally specify an array of imagePullSecrets.
     ## Secrets must be manually created in the namespace.
     ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
@@ -232,9 +232,9 @@ app:
     readOnlyRootFilesystem: false
     allowPrivilegeEscalation: false
     capabilities:
-      drop: ['ALL']
+      drop: ["ALL"]
     seccompProfile:
-      type: 'RuntimeDefault'
+      type: "RuntimeDefault"
 
   ## @param app.command Override default container command (useful when using custom images)
   ##
@@ -260,7 +260,7 @@ app:
   ## @param app.podAffinityPreset Pod affinity preset. Ignored if `app.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
-  podAffinityPreset: ''
+  podAffinityPreset: ""
   ## @param app.podAntiAffinityPreset Pod anti-affinity preset. Ignored if `app.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
@@ -271,10 +271,10 @@ app:
   nodeAffinityPreset:
     ## @param app.nodeAffinityPreset.type Node affinity preset type. Ignored if `app.affinity` is set. Allowed values: `soft` or `hard`
     ##
-    type: ''
+    type: ""
     ## @param app.nodeAffinityPreset.key Node label key to match. Ignored if `app.affinity` is set
     ##
-    key: ''
+    key: ""
     ## @param app.nodeAffinityPreset.values Node label values to match. Ignored if `app.affinity` is set
     ## E.g.
     ## values:
@@ -306,7 +306,7 @@ app:
 
   ## @param app.priorityClassName Hyperdx app pods' priorityClassName
   ##
-  priorityClassName: ''
+  priorityClassName: ""
   ## @param app.topologySpreadConstraints Topology Spread Constraints for pod assignment spread across your cluster among failure-domains. Evaluated as a template
   ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#spread-constraints-for-pods
   ##
@@ -314,11 +314,11 @@ app:
   ## @param app.schedulerName Name of the k8s scheduler (other than default) for Hyperdx app pods
   ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
   ##
-  schedulerName: ''
+  schedulerName: ""
   ## @param app.terminationGracePeriodSeconds Seconds Redmine pod needs to terminate gracefully
   ## ref: https://kubernetes.io/docs/concepts/workloads/pods/pod/#termination-of-pods
   ##
-  terminationGracePeriodSeconds: ''
+  terminationGracePeriodSeconds: ""
   ## @param app.lifecycleHooks for the Hyperdx app container(s) to automate configuration before or after startup
   ##
   lifecycleHooks: {}
@@ -331,10 +331,10 @@ app:
   extraEnvVars: []
   ## @param app.extraEnvVarsCM Name of existing ConfigMap containing extra env vars for Hyperdx app nodes
   ##
-  extraEnvVarsCM: ''
+  extraEnvVarsCM: ""
   ## @param app.extraEnvVarsSecret Name of existing Secret containing extra env vars for Hyperdx app nodes
   ##
-  extraEnvVarsSecret: ''
+  extraEnvVarsSecret: ""
   ## @param app.extraVolumes Optionally specify extra list of additional volumes for the Hyperdx app pod(s)
   ##
   extraVolumes: []
@@ -378,16 +378,16 @@ app:
     ## NOTE: choose port between <30000-32767>
     ##
     nodePorts:
-      http: ''
+      http: ""
     ## @param app.service.clusterIP Hyperdx app service Cluster IP
     ## e.g.:
     ## clusterIP: None
     ##
-    clusterIP: ''
+    clusterIP: ""
     ## @param app.service.loadBalancerIP Hyperdx app service Load Balancer IP
     ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer
     ##
-    loadBalancerIP: ''
+    loadBalancerIP: ""
     ## @param app.service.loadBalancerSourceRanges Hyperdx app service Load Balancer sources
     ## ref: https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/#restrict-access-for-loadbalancer-service
     ## e.g:
@@ -460,10 +460,10 @@ api:
 
   ## @param api.existingConfigmap The name of an existing ConfigMap with the default configuration
   ##
-  existingConfigmap: ''
+  existingConfigmap: ""
   ## @param api.extraConfigExistingConfigmap The name of an existing ConfigMap with extra configuration
   ##
-  extraConfigExistingConfigmap: ''
+  extraConfigExistingConfigmap: ""
 
   ## Hyperdx api image
   ## ref: https://github.com/hyperdxio/hyperdx/pkgs/container/hyperdx
@@ -477,8 +477,8 @@ api:
   image:
     registry: ghcr.io
     repository: hyperdxio/hyperdx
-    tag: 1.6.0-api
-    digest: ''
+    tag: 1.8.0-api
+    digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
     ## ref: http://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
@@ -593,9 +593,9 @@ api:
     readOnlyRootFilesystem: false
     allowPrivilegeEscalation: false
     capabilities:
-      drop: ['ALL']
+      drop: ["ALL"]
     seccompProfile:
-      type: 'RuntimeDefault'
+      type: "RuntimeDefault"
 
   ## @param api.command Override default container command (useful when using custom images)
   ##
@@ -621,7 +621,7 @@ api:
   ## @param api.podAffinityPreset Pod affinity preset. Ignored if `api.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
-  podAffinityPreset: ''
+  podAffinityPreset: ""
   ## @param api.podAntiAffinityPreset Pod anti-affinity preset. Ignored if `api.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
@@ -632,10 +632,10 @@ api:
   nodeAffinityPreset:
     ## @param api.nodeAffinityPreset.type Node affinity preset type. Ignored if `api.affinity` is set. Allowed values: `soft` or `hard`
     ##
-    type: ''
+    type: ""
     ## @param api.nodeAffinityPreset.key Node label key to match. Ignored if `api.affinity` is set
     ##
-    key: ''
+    key: ""
     ## @param api.nodeAffinityPreset.values Node label values to match. Ignored if `api.affinity` is set
     ## E.g.
     ## values:
@@ -667,7 +667,7 @@ api:
 
   ## @param api.priorityClassName Hyperdx api pods' priorityClassName
   ##
-  priorityClassName: ''
+  priorityClassName: ""
   ## @param api.topologySpreadConstraints Topology Spread Constraints for pod assignment spread across your cluster among failure-domains. Evaluated as a template
   ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#spread-constraints-for-pods
   ##
@@ -675,11 +675,11 @@ api:
   ## @param api.schedulerName Name of the k8s scheduler (other than default) for Hyperdx api pods
   ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
   ##
-  schedulerName: ''
+  schedulerName: ""
   ## @param api.terminationGracePeriodSeconds Seconds Redmine pod needs to terminate gracefully
   ## ref: https://kubernetes.io/docs/concepts/workloads/pods/pod/#termination-of-pods
   ##
-  terminationGracePeriodSeconds: ''
+  terminationGracePeriodSeconds: ""
   ## @param api.lifecycleHooks for the Hyperdx api container(s) to automate configuration before or after startup
   ##
   lifecycleHooks: {}
@@ -692,10 +692,10 @@ api:
   extraEnvVars: []
   ## @param api.extraEnvVarsCM Name of existing ConfigMap containing extra env vars for Hyperdx api nodes
   ##
-  extraEnvVarsCM: ''
+  extraEnvVarsCM: ""
   ## @param api.extraEnvVarsSecret Name of existing Secret containing extra env vars for Hyperdx api nodes
   ##
-  extraEnvVarsSecret: ''
+  extraEnvVarsSecret: ""
   ## @param api.extraVolumes Optionally specify extra list of additional volumes for the Hyperdx api pod(s)
   ##
   extraVolumes: []
@@ -739,16 +739,16 @@ api:
     ## NOTE: choose port between <30000-32767>
     ##
     nodePorts:
-      http: ''
+      http: ""
     ## @param api.service.clusterIP Hyperdx api service Cluster IP
     ## e.g.:
     ## clusterIP: None
     ##
-    clusterIP: ''
+    clusterIP: ""
     ## @param api.service.loadBalancerIP Hyperdx api service Load Balancer IP
     ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer
     ##
-    loadBalancerIP: ''
+    loadBalancerIP: ""
     ## @param api.service.loadBalancerSourceRanges Hyperdx api service Load Balancer sources
     ## ref: https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/#restrict-access-for-loadbalancer-service
     ## e.g:
@@ -784,7 +784,7 @@ api:
 ingestor:
   ## @param ingestor.enabled Enable Hyperdx ingestor
   ##
-  enabled: true 
+  enabled: true
   ## @param ingestor.replicaCount Number of Hyperdx ingestor replicas to deploy
   ##
   replicaCount: 1
@@ -805,10 +805,10 @@ ingestor:
 
   ## @param ingestor.existingConfigmap The name of an existing ConfigMap with the default configuration
   ##
-  existingConfigmap: ''
+  existingConfigmap: ""
   ## @param ingestor.extraConfigExistingConfigmap The name of an existing ConfigMap with extra configuration
   ##
-  extraConfigExistingConfigmap: ''
+  extraConfigExistingConfigmap: ""
 
   ## Hyperdx ingestor image
   ## ref: https://github.com/hyperdxio/hyperdx/pkgs/container/hyperdx
@@ -822,8 +822,8 @@ ingestor:
   image:
     registry: ghcr.io
     repository: hyperdxio/hyperdx
-    tag: 1.6.0-ingestor
-    digest: ''
+    tag: 1.8.0-ingestor
+    digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
     ## ref: http://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
@@ -940,9 +940,9 @@ ingestor:
     readOnlyRootFilesystem: false
     allowPrivilegeEscalation: false
     capabilities:
-      drop: ['ALL']
+      drop: ["ALL"]
     seccompProfile:
-      type: 'RuntimeDefault'
+      type: "RuntimeDefault"
 
   ## @param ingestor.command Override default container command (useful when using custom images)
   ##
@@ -968,7 +968,7 @@ ingestor:
   ## @param ingestor.podAffinityPreset Pod affinity preset. Ignored if `ingestor.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
-  podAffinityPreset: ''
+  podAffinityPreset: ""
   ## @param ingestor.podAntiAffinityPreset Pod anti-affinity preset. Ignored if `ingestor.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
@@ -979,10 +979,10 @@ ingestor:
   nodeAffinityPreset:
     ## @param ingestor.nodeAffinityPreset.type Node affinity preset type. Ignored if `ingestor.affinity` is set. Allowed values: `soft` or `hard`
     ##
-    type: ''
+    type: ""
     ## @param ingestor.nodeAffinityPreset.key Node label key to match. Ignored if `ingestor.affinity` is set
     ##
-    key: ''
+    key: ""
     ## @param ingestor.nodeAffinityPreset.values Node label values to match. Ignored if `ingestor.affinity` is set
     ## E.g.
     ## values:
@@ -1014,7 +1014,7 @@ ingestor:
 
   ## @param ingestor.priorityClassName Hyperdx ingestor pods' priorityClassName
   ##
-  priorityClassName: ''
+  priorityClassName: ""
   ## @param ingestor.topologySpreadConstraints Topology Spread Constraints for pod assignment spread across your cluster among failure-domains. Evaluated as a template
   ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#spread-constraints-for-pods
   ##
@@ -1022,11 +1022,11 @@ ingestor:
   ## @param ingestor.schedulerName Name of the k8s scheduler (other than default) for Hyperdx ingestor pods
   ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
   ##
-  schedulerName: ''
+  schedulerName: ""
   ## @param ingestor.terminationGracePeriodSeconds Seconds Redmine pod needs to terminate gracefully
   ## ref: https://kubernetes.io/docs/concepts/workloads/pods/pod/#termination-of-pods
   ##
-  terminationGracePeriodSeconds: ''
+  terminationGracePeriodSeconds: ""
   ## @param ingestor.lifecycleHooks for the Hyperdx ingestor container(s) to automate configuration before or after startup
   ##
   lifecycleHooks: {}
@@ -1039,10 +1039,10 @@ ingestor:
   extraEnvVars: []
   ## @param ingestor.extraEnvVarsCM Name of existing ConfigMap containing extra env vars for Hyperdx ingestor nodes
   ##
-  extraEnvVarsCM: ''
+  extraEnvVarsCM: ""
   ## @param ingestor.extraEnvVarsSecret Name of existing Secret containing extra env vars for Hyperdx ingestor nodes
   ##
-  extraEnvVarsSecret: ''
+  extraEnvVarsSecret: ""
   ## @param ingestor.extraVolumes Optionally specify extra list of additional volumes for the Hyperdx ingestor pod(s)
   ##
   extraVolumes: []
@@ -1086,16 +1086,16 @@ ingestor:
     ## NOTE: choose port between <30000-32767>
     ##
     nodePorts:
-      http: ''
+      http: ""
     ## @param ingestor.service.clusterIP Hyperdx ingestor service Cluster IP
     ## e.g.:
     ## clusterIP: None
     ##
-    clusterIP: ''
+    clusterIP: ""
     ## @param ingestor.service.loadBalancerIP Hyperdx ingestor service Load Balancer IP
     ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer
     ##
-    loadBalancerIP: ''
+    loadBalancerIP: ""
     ## @param ingestor.service.loadBalancerSourceRanges Hyperdx ingestor service Load Balancer sources
     ## ref: https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/#restrict-access-for-loadbalancer-service
     ## e.g:
@@ -1131,7 +1131,7 @@ ingestor:
 aggregator:
   ## @param aggregator.enabled Enable Hyperdx aggregator
   ##
-  enabled: true 
+  enabled: true
   ## @param aggregator.replicaCount Number of Hyperdx aggregator replicas to deploy
   ##
   replicaCount: 1
@@ -1157,10 +1157,10 @@ aggregator:
 
   ## @param aggregator.existingConfigmap The name of an existing ConfigMap with the default configuration
   ##
-  existingConfigmap: ''
+  existingConfigmap: ""
   ## @param aggregator.extraConfigExistingConfigmap The name of an existing ConfigMap with extra configuration
   ##
-  extraConfigExistingConfigmap: ''
+  extraConfigExistingConfigmap: ""
 
   ## Hyperdx aggregator image
   ## ref: https://github.com/hyperdxio/hyperdx/pkgs/container/hyperdx
@@ -1174,8 +1174,8 @@ aggregator:
   image:
     registry: ghcr.io
     repository: hyperdxio/hyperdx
-    tag: 1.6.0-api
-    digest: ''
+    tag: 1.8.0-api
+    digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
     ## ref: http://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
@@ -1290,9 +1290,9 @@ aggregator:
     readOnlyRootFilesystem: false
     allowPrivilegeEscalation: false
     capabilities:
-      drop: ['ALL']
+      drop: ["ALL"]
     seccompProfile:
-      type: 'RuntimeDefault'
+      type: "RuntimeDefault"
 
   ## @param aggregator.command Override default container command (useful when using custom images)
   ##
@@ -1318,7 +1318,7 @@ aggregator:
   ## @param aggregator.podAffinityPreset Pod affinity preset. Ignored if `aggregator.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
-  podAffinityPreset: ''
+  podAffinityPreset: ""
   ## @param aggregator.podAntiAffinityPreset Pod anti-affinity preset. Ignored if `aggregator.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
@@ -1329,10 +1329,10 @@ aggregator:
   nodeAffinityPreset:
     ## @param aggregator.nodeAffinityPreset.type Node affinity preset type. Ignored if `aggregator.affinity` is set. Allowed values: `soft` or `hard`
     ##
-    type: ''
+    type: ""
     ## @param aggregator.nodeAffinityPreset.key Node label key to match. Ignored if `aggregator.affinity` is set
     ##
-    key: ''
+    key: ""
     ## @param aggregator.nodeAffinityPreset.values Node label values to match. Ignored if `aggregator.affinity` is set
     ## E.g.
     ## values:
@@ -1364,7 +1364,7 @@ aggregator:
 
   ## @param aggregator.priorityClassName Hyperdx aggregator pods' priorityClassName
   ##
-  priorityClassName: ''
+  priorityClassName: ""
   ## @param aggregator.topologySpreadConstraints Topology Spread Constraints for pod assignment spread across your cluster among failure-domains. Evaluated as a template
   ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#spread-constraints-for-pods
   ##
@@ -1372,11 +1372,11 @@ aggregator:
   ## @param aggregator.schedulerName Name of the k8s scheduler (other than default) for Hyperdx aggregator pods
   ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
   ##
-  schedulerName: ''
+  schedulerName: ""
   ## @param aggregator.terminationGracePeriodSeconds Seconds Redmine pod needs to terminate gracefully
   ## ref: https://kubernetes.io/docs/concepts/workloads/pods/pod/#termination-of-pods
   ##
-  terminationGracePeriodSeconds: ''
+  terminationGracePeriodSeconds: ""
   ## @param aggregator.lifecycleHooks for the Hyperdx aggregator container(s) to automate configuration before or after startup
   ##
   lifecycleHooks: {}
@@ -1389,10 +1389,10 @@ aggregator:
   extraEnvVars: []
   ## @param aggregator.extraEnvVarsCM Name of existing ConfigMap containing extra env vars for Hyperdx aggregator nodes
   ##
-  extraEnvVarsCM: ''
+  extraEnvVarsCM: ""
   ## @param aggregator.extraEnvVarsSecret Name of existing Secret containing extra env vars for Hyperdx aggregator nodes
   ##
-  extraEnvVarsSecret: ''
+  extraEnvVarsSecret: ""
   ## @param aggregator.extraVolumes Optionally specify extra list of additional volumes for the Hyperdx aggregator pod(s)
   ##
   extraVolumes: []
@@ -1436,16 +1436,16 @@ aggregator:
     ## NOTE: choose port between <30000-32767>
     ##
     nodePorts:
-      http: ''
+      http: ""
     ## @param aggregator.service.clusterIP Hyperdx aggregator service Cluster IP
     ## e.g.:
     ## clusterIP: None
     ##
-    clusterIP: ''
+    clusterIP: ""
     ## @param aggregator.service.loadBalancerIP Hyperdx aggregator service Load Balancer IP
     ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer
     ##
-    loadBalancerIP: ''
+    loadBalancerIP: ""
     ## @param aggregator.service.loadBalancerSourceRanges Hyperdx aggregator service Load Balancer sources
     ## ref: https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/#restrict-access-for-loadbalancer-service
     ## e.g:
@@ -1481,7 +1481,7 @@ aggregator:
 goParser:
   ## @param goParser.enabled Enable Hyperdx goParser
   ##
-  enabled: true 
+  enabled: true
   ## @param goParser.replicaCount Number of Hyperdx goParser replicas to deploy
   ##
   replicaCount: 1
@@ -1503,10 +1503,10 @@ goParser:
 
   ## @param goParser.existingConfigmap The name of an existing ConfigMap with the default configuration
   ##
-  existingConfigmap: ''
+  existingConfigmap: ""
   ## @param goParser.extraConfigExistingConfigmap The name of an existing ConfigMap with extra configuration
   ##
-  extraConfigExistingConfigmap: ''
+  extraConfigExistingConfigmap: ""
 
   ## Hyperdx go parser image
   ## ref: https://github.com/hyperdxio/hyperdx/pkgs/container/hyperdx
@@ -1520,8 +1520,8 @@ goParser:
   image:
     registry: ghcr.io
     repository: hyperdxio/hyperdx
-    tag: 1.6.0-go-parser
-    digest: ''
+    tag: 1.8.0-go-parser
+    digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
     ## ref: http://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
@@ -1636,9 +1636,9 @@ goParser:
     readOnlyRootFilesystem: false
     allowPrivilegeEscalation: false
     capabilities:
-      drop: ['ALL']
+      drop: ["ALL"]
     seccompProfile:
-      type: 'RuntimeDefault'
+      type: "RuntimeDefault"
 
   ## @param goParser.command Override default container command (useful when using custom images)
   ##
@@ -1664,7 +1664,7 @@ goParser:
   ## @param goParser.podAffinityPreset Pod affinity preset. Ignored if `goParser.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
-  podAffinityPreset: ''
+  podAffinityPreset: ""
   ## @param goParser.podAntiAffinityPreset Pod anti-affinity preset. Ignored if `goParser.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
@@ -1675,10 +1675,10 @@ goParser:
   nodeAffinityPreset:
     ## @param goParser.nodeAffinityPreset.type Node affinity preset type. Ignored if `goParser.affinity` is set. Allowed values: `soft` or `hard`
     ##
-    type: ''
+    type: ""
     ## @param goParser.nodeAffinityPreset.key Node label key to match. Ignored if `goParser.affinity` is set
     ##
-    key: ''
+    key: ""
     ## @param goParser.nodeAffinityPreset.values Node label values to match. Ignored if `goParser.affinity` is set
     ## E.g.
     ## values:
@@ -1710,7 +1710,7 @@ goParser:
 
   ## @param goParser.priorityClassName Hyperdx goParser pods' priorityClassName
   ##
-  priorityClassName: ''
+  priorityClassName: ""
   ## @param goParser.topologySpreadConstraints Topology Spread Constraints for pod assignment spread across your cluster among failure-domains. Evaluated as a template
   ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#spread-constraints-for-pods
   ##
@@ -1718,11 +1718,11 @@ goParser:
   ## @param goParser.schedulerName Name of the k8s scheduler (other than default) for Hyperdx goParser pods
   ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
   ##
-  schedulerName: ''
+  schedulerName: ""
   ## @param goParser.terminationGracePeriodSeconds Seconds Redmine pod needs to terminate gracefully
   ## ref: https://kubernetes.io/docs/concepts/workloads/pods/pod/#termination-of-pods
   ##
-  terminationGracePeriodSeconds: ''
+  terminationGracePeriodSeconds: ""
   ## @param goParser.lifecycleHooks for the Hyperdx goParser container(s) to automate configuration before or after startup
   ##
   lifecycleHooks: {}
@@ -1735,10 +1735,10 @@ goParser:
   extraEnvVars: []
   ## @param goParser.extraEnvVarsCM Name of existing ConfigMap containing extra env vars for Hyperdx goParser nodes
   ##
-  extraEnvVarsCM: ''
+  extraEnvVarsCM: ""
   ## @param goParser.extraEnvVarsSecret Name of existing Secret containing extra env vars for Hyperdx goParser nodes
   ##
-  extraEnvVarsSecret: ''
+  extraEnvVarsSecret: ""
   ## @param goParser.extraVolumes Optionally specify extra list of additional volumes for the Hyperdx goParser pod(s)
   ##
   extraVolumes: []
@@ -1782,16 +1782,16 @@ goParser:
     ## NOTE: choose port between <30000-32767>
     ##
     nodePorts:
-      http: ''
+      http: ""
     ## @param goParser.service.clusterIP Hyperdx goParser service Cluster IP
     ## e.g.:
     ## clusterIP: None
     ##
-    clusterIP: ''
+    clusterIP: ""
     ## @param goParser.service.loadBalancerIP Hyperdx goParser service Load Balancer IP
     ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer
     ##
-    loadBalancerIP: ''
+    loadBalancerIP: ""
     ## @param goParser.service.loadBalancerSourceRanges Hyperdx goParser service Load Balancer sources
     ## ref: https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/#restrict-access-for-loadbalancer-service
     ## e.g:
@@ -1827,7 +1827,7 @@ goParser:
 miner:
   ## @param miner.enabled Enable Hyperdx miner
   ##
-  enabled: true 
+  enabled: true
   ## @param miner.replicaCount Number of Hyperdx miner replicas to deploy
   ##
   replicaCount: 1
@@ -1848,10 +1848,10 @@ miner:
 
   ## @param miner.existingConfigmap The name of an existing ConfigMap with the default configuration
   ##
-  existingConfigmap: ''
+  existingConfigmap: ""
   ## @param miner.extraConfigExistingConfigmap The name of an existing ConfigMap with extra configuration
   ##
-  extraConfigExistingConfigmap: ''
+  extraConfigExistingConfigmap: ""
 
   ## Hyperdx miner image
   ## ref: https://github.com/hyperdxio/hyperdx/pkgs/container/hyperdx
@@ -1865,8 +1865,8 @@ miner:
   image:
     registry: ghcr.io
     repository: hyperdxio/hyperdx
-    tag: 1.6.0-miner
-    digest: ''
+    tag: 1.8.0-miner
+    digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
     ## ref: http://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
@@ -1981,9 +1981,9 @@ miner:
     readOnlyRootFilesystem: false
     allowPrivilegeEscalation: false
     capabilities:
-      drop: ['ALL']
+      drop: ["ALL"]
     seccompProfile:
-      type: 'RuntimeDefault'
+      type: "RuntimeDefault"
 
   ## @param miner.command Override default container command (useful when using custom images)
   ##
@@ -2009,7 +2009,7 @@ miner:
   ## @param miner.podAffinityPreset Pod affinity preset. Ignored if `miner.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
-  podAffinityPreset: ''
+  podAffinityPreset: ""
   ## @param miner.podAntiAffinityPreset Pod anti-affinity preset. Ignored if `miner.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
@@ -2020,10 +2020,10 @@ miner:
   nodeAffinityPreset:
     ## @param miner.nodeAffinityPreset.type Node affinity preset type. Ignored if `miner.affinity` is set. Allowed values: `soft` or `hard`
     ##
-    type: ''
+    type: ""
     ## @param miner.nodeAffinityPreset.key Node label key to match. Ignored if `miner.affinity` is set
     ##
-    key: ''
+    key: ""
     ## @param miner.nodeAffinityPreset.values Node label values to match. Ignored if `miner.affinity` is set
     ## E.g.
     ## values:
@@ -2055,7 +2055,7 @@ miner:
 
   ## @param miner.priorityClassName Hyperdx miner pods' priorityClassName
   ##
-  priorityClassName: ''
+  priorityClassName: ""
   ## @param miner.topologySpreadConstraints Topology Spread Constraints for pod assignment spread across your cluster among failure-domains. Evaluated as a template
   ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#spread-constraints-for-pods
   ##
@@ -2063,11 +2063,11 @@ miner:
   ## @param miner.schedulerName Name of the k8s scheduler (other than default) for Hyperdx miner pods
   ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
   ##
-  schedulerName: ''
+  schedulerName: ""
   ## @param miner.terminationGracePeriodSeconds Seconds Redmine pod needs to terminate gracefully
   ## ref: https://kubernetes.io/docs/concepts/workloads/pods/pod/#termination-of-pods
   ##
-  terminationGracePeriodSeconds: ''
+  terminationGracePeriodSeconds: ""
   ## @param miner.lifecycleHooks for the Hyperdx miner container(s) to automate configuration before or after startup
   ##
   lifecycleHooks: {}
@@ -2080,10 +2080,10 @@ miner:
   extraEnvVars: []
   ## @param miner.extraEnvVarsCM Name of existing ConfigMap containing extra env vars for Hyperdx miner nodes
   ##
-  extraEnvVarsCM: ''
+  extraEnvVarsCM: ""
   ## @param miner.extraEnvVarsSecret Name of existing Secret containing extra env vars for Hyperdx miner nodes
   ##
-  extraEnvVarsSecret: ''
+  extraEnvVarsSecret: ""
   ## @param miner.extraVolumes Optionally specify extra list of additional volumes for the Hyperdx miner pod(s)
   ##
   extraVolumes: []
@@ -2127,16 +2127,16 @@ miner:
     ## NOTE: choose port between <30000-32767>
     ##
     nodePorts:
-      http: ''
+      http: ""
     ## @param miner.service.clusterIP Hyperdx miner service Cluster IP
     ## e.g.:
     ## clusterIP: None
     ##
-    clusterIP: ''
+    clusterIP: ""
     ## @param miner.service.loadBalancerIP Hyperdx miner service Load Balancer IP
     ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer
     ##
-    loadBalancerIP: ''
+    loadBalancerIP: ""
     ## @param miner.service.loadBalancerSourceRanges Hyperdx miner service Load Balancer sources
     ## ref: https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/#restrict-access-for-loadbalancer-service
     ## e.g:
@@ -2172,7 +2172,7 @@ miner:
 otelCollector:
   ## @param otelCollector.enabled Enable Hyperdx open-telemetry collector
   ##
-  enabled: true 
+  enabled: true
   ## @param otelCollector.replicaCount Number of Hyperdx otelCollector replicas to deploy
   ##
   replicaCount: 1
@@ -2188,10 +2188,10 @@ otelCollector:
 
   ## @param otelCollector.existingConfigmap The name of an existing ConfigMap with the default configuration
   ##
-  existingConfigmap: ''
+  existingConfigmap: ""
   ## @param otelCollector.extraConfigExistingConfigmap The name of an existing ConfigMap with extra configuration
   ##
-  extraConfigExistingConfigmap: ''
+  extraConfigExistingConfigmap: ""
 
   ## Hyperdx otelCollector image
   ## ref: https://github.com/hyperdxio/hyperdx/pkgs/container/hyperdx
@@ -2205,8 +2205,8 @@ otelCollector:
   image:
     registry: ghcr.io
     repository: hyperdxio/hyperdx
-    tag: 1.6.0-otel-collector
-    digest: ''
+    tag: 1.8.0-otel-collector
+    digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
     ## ref: http://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
@@ -2235,10 +2235,10 @@ otelCollector:
     health: 13133
     grpc: 4317
     pprof: 1888
-    fluentd: 24225 
+    fluentd: 24225
     zpages: 55679
-    metrics: 8888 
-    zipkin: 9411 
+    metrics: 8888
+    zipkin: 9411
   ## Configure extra options for Hyperdx otelCollector containers' liveness and readiness probes
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
   ## @param otelCollector.livenessProbe.enabled Enable livenessProbe on Hyperdx otelCollector containers
@@ -2335,9 +2335,9 @@ otelCollector:
     readOnlyRootFilesystem: false
     allowPrivilegeEscalation: false
     capabilities:
-      drop: ['ALL']
+      drop: ["ALL"]
     seccompProfile:
-      type: 'RuntimeDefault'
+      type: "RuntimeDefault"
 
   ## @param otelCollector.command Override default container command (useful when using custom images)
   ##
@@ -2363,7 +2363,7 @@ otelCollector:
   ## @param otelCollector.podAffinityPreset Pod affinity preset. Ignored if `otelCollector.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
-  podAffinityPreset: ''
+  podAffinityPreset: ""
   ## @param otelCollector.podAntiAffinityPreset Pod anti-affinity preset. Ignored if `otelCollector.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
@@ -2374,10 +2374,10 @@ otelCollector:
   nodeAffinityPreset:
     ## @param otelCollector.nodeAffinityPreset.type Node affinity preset type. Ignored if `otelCollector.affinity` is set. Allowed values: `soft` or `hard`
     ##
-    type: ''
+    type: ""
     ## @param otelCollector.nodeAffinityPreset.key Node label key to match. Ignored if `otelCollector.affinity` is set
     ##
-    key: ''
+    key: ""
     ## @param otelCollector.nodeAffinityPreset.values Node label values to match. Ignored if `otelCollector.affinity` is set
     ## E.g.
     ## values:
@@ -2409,7 +2409,7 @@ otelCollector:
 
   ## @param otelCollector.priorityClassName Hyperdx otelCollector pods' priorityClassName
   ##
-  priorityClassName: ''
+  priorityClassName: ""
   ## @param otelCollector.topologySpreadConstraints Topology Spread Constraints for pod assignment spread across your cluster among failure-domains. Evaluated as a template
   ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#spread-constraints-for-pods
   ##
@@ -2417,11 +2417,11 @@ otelCollector:
   ## @param otelCollector.schedulerName Name of the k8s scheduler (other than default) for Hyperdx otelCollector pods
   ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
   ##
-  schedulerName: ''
+  schedulerName: ""
   ## @param otelCollector.terminationGracePeriodSeconds Seconds Redmine pod needs to terminate gracefully
   ## ref: https://kubernetes.io/docs/concepts/workloads/pods/pod/#termination-of-pods
   ##
-  terminationGracePeriodSeconds: ''
+  terminationGracePeriodSeconds: ""
   ## @param otelCollector.lifecycleHooks for the Hyperdx otelCollector container(s) to automate configuration before or after startup
   ##
   lifecycleHooks: {}
@@ -2434,10 +2434,10 @@ otelCollector:
   extraEnvVars: []
   ## @param otelCollector.extraEnvVarsCM Name of existing ConfigMap containing extra env vars for Hyperdx otelCollector nodes
   ##
-  extraEnvVarsCM: ''
+  extraEnvVarsCM: ""
   ## @param otelCollector.extraEnvVarsSecret Name of existing Secret containing extra env vars for Hyperdx otelCollector nodes
   ##
-  extraEnvVarsSecret: ''
+  extraEnvVarsSecret: ""
   ## @param otelCollector.extraVolumes Optionally specify extra list of additional volumes for the Hyperdx otelCollector pod(s)
   ##
   extraVolumes: []
@@ -2481,16 +2481,16 @@ otelCollector:
     ## NOTE: choose port between <30000-32767>
     ##
     nodePorts:
-      http: ''
+      http: ""
     ## @param otelCollector.service.clusterIP Hyperdx otelCollector service Cluster IP
     ## e.g.:
     ## clusterIP: None
     ##
-    clusterIP: ''
+    clusterIP: ""
     ## @param otelCollector.service.loadBalancerIP Hyperdx otelCollector service Load Balancer IP
     ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer
     ##
-    loadBalancerIP: ''
+    loadBalancerIP: ""
     ## @param otelCollector.service.loadBalancerSourceRanges Hyperdx otelCollector service Load Balancer sources
     ## ref: https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/#restrict-access-for-loadbalancer-service
     ## e.g:
@@ -2561,8 +2561,8 @@ taskCheckAlerts:
   image:
     registry: ghcr.io
     repository: hyperdxio/hyperdx
-    tag: 1.6.0-api
-    digest: ''
+    tag: 1.8.0-api
+    digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
     ## ref: http://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
@@ -2582,7 +2582,7 @@ taskCheckAlerts:
   cronjob:
     ## @param taskCheckAlerts.cronjob.schedule Kubernetes CronJob schedule
     ##
-    schedule: '* * * * *'
+    schedule: "* * * * *"
     ## @param taskCheckAlerts.cronjob.concurrencyPolicy Set the cronjob parameter concurrencyPolicy
     ##
     concurrencyPolicy: Forbid
@@ -2594,7 +2594,7 @@ taskCheckAlerts:
     successfulJobsHistoryLimit: 3
     ## @param taskCheckAlerts.cronjob.ttlSecondsAfterFinished Set the cronjob parameter ttlSecondsAfterFinished
     ##
-    ttlSecondsAfterFinished: ''
+    ttlSecondsAfterFinished: ""
     ## @param taskCheckAlerts.cronjob.restartPolicy Set the cronjob parameter restartPolicy
     ##
     restartPolicy: OnFailure
@@ -2628,9 +2628,9 @@ taskCheckAlerts:
       readOnlyRootFilesystem: false
       allowPrivilegeEscalation: false
       capabilities:
-        drop: ['ALL']
+        drop: ["ALL"]
       seccompProfile:
-        type: 'RuntimeDefault'
+        type: "RuntimeDefault"
     ## @param taskCheckAlerts.cronjob.podAnnotations Additional pod annotations
     ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
     ##
@@ -2644,14 +2644,14 @@ taskCheckAlerts:
 ## Dependency charts
 ## ==========================================
 
-## @section Kong chart configurations 
+## @section Kong chart configurations
 ## ref: https://github.com/bitnami/charts/blob/main/bitnami/kong/values.yaml
 ##
 kong:
   ## @param kong.enabled Enable Kong
   ##
   enabled: true
- 
+
   ## Bitnami kong image version
   ## ref: https://hub.docker.com/r/bitnami/kong/tags/
   ## @param kong.image.registry [default: docker.io] kong image registry
@@ -2686,7 +2686,7 @@ kong:
 
   ## @param kong.replicaCount Number of Kong replicas
   ##
-  replicaCount: 1 
+  replicaCount: 1
 
   ## @param kong.initContainers Add additional init containers to the Kong pods
   ## e.g.
@@ -2730,7 +2730,7 @@ kong:
   extraVolumes:
     - name: declarative-conf-template
       configMap:
-        name: "hyperdx-kong-declarative-conf" 
+        name: "hyperdx-kong-declarative-conf"
     - name: rendered-declarative-conf
       emptyDir: {}
   ## @param kong.kong.extraVolumeMounts [array] Additional volumeMounts to be added to the Kong Container (evaluated as template). Normally used with `kong.extraVolumes`.
@@ -2774,11 +2774,11 @@ kong:
     ports:
       proxyHttp: 80
 
-  ## @param kong.database Select which database backend Kong will use. Can be 'postgresql', 'cassandra' or 'off'. 
+  ## @param kong.database Select which database backend Kong will use. Can be 'postgresql', 'cassandra' or 'off'.
   ## Default to 'off' as declarative configuration is enabled by default so we don't need the database
   ## ref: https://docs.konghq.com/gateway/latest/production/deployment-topologies/db-less-and-declarative-config/
   ##
-  database: 'off' 
+  database: "off"
   ## @param kong.postgresql.enabled Switch to enable or disable the PostgreSQL helm chart inside the Kong subchart
   ## db is not needed since we use declarative configuration
   ##
@@ -2843,7 +2843,7 @@ mongodb:
   ##
   service:
     ports:
-      mongodb: 27017 
+      mongodb: 27017
 
 ## Redis chart configuration
 ## ref: https://github.com/bitnami/charts/blob/main/bitnami/redis/values.yaml
@@ -2866,7 +2866,7 @@ redis:
     registry: docker.io
     repository: bitnami/redis
     tag: 7.2.4-debian-11-r2
-    digest: ''
+    digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
     ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
@@ -2969,7 +2969,7 @@ clickhouse:
   ## @param clickhouse.zookeeper.enabled Deploy Zookeeper subchart
   ##
   zookeeper:
-    enabled: false 
+    enabled: false
 
   ## ClickHouse service parameters
   ##
@@ -3051,7 +3051,6 @@ clickhouse:
 
       <format_schema_path>/var/lib/clickhouse/format_schemas/</format_schema_path>
     </clickhouse>
-
 
   ## @param clickhouse.usersExtraOverrides Users extra configuration overrides (evaluated as a template) apart from the default
   ##
