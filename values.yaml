@@ -3,6 +3,8 @@
 ## Please, note that this will override the image parameters, including dependencies, configured to use the global value
 ## Current available global Docker image parameters: imageRegistry, imagePullSecrets and storageClass
 ##
+serviceAccount:
+  create: false
 
 ## @param global.imageRegistry Global Docker image registry
 ## @param global.imagePullSecrets Global Docker registry secret names as an array
@@ -116,7 +118,7 @@ app:
   image:
     registry: ghcr.io
     repository: hyperdxio/hyperdx
-    tag: 1.8.0-app
+    tag: 1.9.0-app
     digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -477,7 +479,7 @@ api:
   image:
     registry: ghcr.io
     repository: hyperdxio/hyperdx
-    tag: 1.8.0-api
+    tag: 1.9.0-api
     digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -822,7 +824,7 @@ ingestor:
   image:
     registry: ghcr.io
     repository: hyperdxio/hyperdx
-    tag: 1.8.0-ingestor
+    tag: 1.9.0-ingestor
     digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -1174,7 +1176,7 @@ aggregator:
   image:
     registry: ghcr.io
     repository: hyperdxio/hyperdx
-    tag: 1.8.0-api
+    tag: 1.9.0-api
     digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -1520,7 +1522,7 @@ goParser:
   image:
     registry: ghcr.io
     repository: hyperdxio/hyperdx
-    tag: 1.8.0-go-parser
+    tag: 1.9.0-go-parser
     digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -1865,7 +1867,7 @@ miner:
   image:
     registry: ghcr.io
     repository: hyperdxio/hyperdx
-    tag: 1.8.0-miner
+    tag: 1.9.0-miner
     digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -2205,7 +2207,7 @@ otelCollector:
   image:
     registry: ghcr.io
     repository: hyperdxio/hyperdx
-    tag: 1.8.0-otel-collector
+    tag: 1.9.0-otel-collector
     digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -2561,7 +2563,7 @@ taskCheckAlerts:
   image:
     registry: ghcr.io
     repository: hyperdxio/hyperdx
-    tag: 1.8.0-api
+    tag: 1.9.0-api
     digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -2650,7 +2652,7 @@ taskCheckAlerts:
 kong:
   ## @param kong.enabled Enable Kong
   ##
-  enabled: true
+  enabled: false
 
   ## Bitnami kong image version
   ## ref: https://hub.docker.com/r/bitnami/kong/tags/
@@ -2665,7 +2667,7 @@ kong:
   image:
     registry: docker.io
     repository: bitnami/kong
-    tag: 3.4.2-debian-11-r1
+    tag: 3.7.1-debian-12-r6
     digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -2706,7 +2708,7 @@ kong:
         - -ec
         - |
           #!/bin/bash
-          # https://github.com/bitnami/containers/blob/main/bitnami/kong/3/debian-11/prebuildfs/opt/bitnami/scripts/liblog.sh
+          # https://github.com/bitnami/containers/blob/main/bitnami/kong/3/debian-12/prebuildfs/opt/bitnami/scripts/liblog.sh
           . /opt/bitnami/scripts/liblog.sh
           info "Rendering hyperdx declarative config template for Kong"
 
@@ -2805,7 +2807,7 @@ mongodb:
   image:
     registry: docker.io
     repository: bitnami/mongodb
-    tag: 7.0.5-debian-11-r3
+    tag: 7.0.12-debian-12-r4
     digest: ""
     ## Specify a imagePullPolicy
     ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
@@ -2845,6 +2847,17 @@ mongodb:
     ports:
       mongodb: 27017
 
+  ## Persistence Parameters
+  ## ref: https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+  ##
+  persistence:
+    ## @param persistence.size Persistent Volume size
+    ##
+    size: 40Gi
+    ## @param persistence.resourcePolicy Setting it to "keep" to avoid removing PVCs during a helm delete operation. Leaving it empty will delete PVCs after the chart deleted
+    ##
+    resourcePolicy: "keep"
+
 ## Redis chart configuration
 ## ref: https://github.com/bitnami/charts/blob/main/bitnami/redis/values.yaml
 ##
@@ -2865,7 +2878,7 @@ redis:
   image:
     registry: docker.io
     repository: bitnami/redis
-    tag: 7.2.4-debian-11-r2
+    tag: 7.2.5-debian-12-r4
     digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -2898,6 +2911,20 @@ redis:
   auth:
     enabled: false
 
+  ## @section Redis&reg; master configuration parameters
+  ##
+  master:
+    ## Persistence Parameters
+    ## ref: https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+    ##
+    persistence:
+      ## @param master.persistence.enabled Enable persistence on Redis&reg; master nodes using Persistent Volume Claims
+      ##
+      enabled: false
+      ## @param persistence.size Persistent Volume size
+      ##
+      size: 40Gi
+
 ## Clickhouse chart configuration
 ## ref: https://github.com/bitnami/charts/blob/main/bitnami/clickhouse/values.yaml
 ##
@@ -2919,7 +2946,7 @@ clickhouse:
   image:
     registry: docker.io
     repository: bitnami/clickhouse
-    tag: 23.12.2-debian-11-r0
+    tag: 24.6.2-debian-12-r3
     digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -2970,6 +2997,13 @@ clickhouse:
   ##
   zookeeper:
     enabled: false
+    ## Enable persistence using Persistent Volume Claims
+    ## ref: https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+    ##
+    persistence:
+      ## @param persistence.enabled Enable ZooKeeper data persistence using PVC. If false, use emptyDir
+      ##
+      enabled: false
 
   ## ClickHouse service parameters
   ##
@@ -3001,6 +3035,25 @@ clickhouse:
       postgresql: 9005
       interserver: 9009
       metrics: 8001
+
+  ## Persistence Parameters
+  ## ref: https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+  ##
+  persistence:
+    ## @param persistence.size Persistent Volume size
+    ##
+    size: 40Gi
+
+  ## Init Container resource requests and limits
+  ## ref: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+  ## We usually recommend not to specify default resources and to leave this as a conscious
+  ## choice for the user. This also increases chances charts run on environments with little
+  ## resources, such as Minikube. If you do want to specify resources, uncomment the following
+  ## lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  ## @param tls.resourcesPreset Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if tls.resources is set (tls.resources is recommended for production).
+  ## More information: https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15
+  ##
+  resourcesPreset: "small"
 
   ## @param clickhouse.extraOverrides Extra configuration overrides (evaluated as a template) apart from the default
   ##
