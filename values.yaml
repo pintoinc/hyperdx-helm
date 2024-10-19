@@ -118,7 +118,7 @@ app:
   image:
     registry: ghcr.io
     repository: hyperdxio/hyperdx
-    tag: 1.9.0-app
+    tag: 1.10.0-app
     digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -479,7 +479,7 @@ api:
   image:
     registry: ghcr.io
     repository: hyperdxio/hyperdx
-    tag: 1.9.0-api
+    tag: 1.10.0-api
     digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -824,7 +824,7 @@ ingestor:
   image:
     registry: ghcr.io
     repository: hyperdxio/hyperdx
-    tag: 1.9.0-ingestor
+    tag: 1.10.0-ingestor
     digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -1176,7 +1176,7 @@ aggregator:
   image:
     registry: ghcr.io
     repository: hyperdxio/hyperdx
-    tag: 1.9.0-api
+    tag: 1.10.0-api
     digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -1522,7 +1522,7 @@ goParser:
   image:
     registry: ghcr.io
     repository: hyperdxio/hyperdx
-    tag: 1.9.0-go-parser
+    tag: 1.10.0-go-parser
     digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -1867,7 +1867,7 @@ miner:
   image:
     registry: ghcr.io
     repository: hyperdxio/hyperdx
-    tag: 1.9.0-miner
+    tag: 1.10.0-miner
     digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -2207,7 +2207,7 @@ otelCollector:
   image:
     registry: ghcr.io
     repository: hyperdxio/hyperdx
-    tag: 1.9.0-otel-collector
+    tag: 1.10.0-otel-collector
     digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -2563,7 +2563,7 @@ taskCheckAlerts:
   image:
     registry: ghcr.io
     repository: hyperdxio/hyperdx
-    tag: 1.9.0-api
+    tag: 1.10.0-api
     digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -2946,7 +2946,7 @@ clickhouse:
   image:
     registry: docker.io
     repository: bitnami/clickhouse
-    tag: 24.6.2-debian-12-r3
+    tag: 24.9.2-debian-12-r1
     digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'

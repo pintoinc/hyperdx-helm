@@ -29,7 +29,7 @@ This chart is still in development and requires a few involved steps. If you wis
   <summary>FYI</summary>
 
 - For the installation to be useful outside of a local playground, the user needs to build their own image because the dashboard code reads the build time envs but the envs are only available during runtime on the server side in the pod. (TODO: fix this in dashboard so the same image can be used for [any environments](https://github.com/vercel/next.js/discussions/17641))
-- The current latest release is `ghcr.io/hyperdxio/hyperdx:1.9.0-app` and is built with
+- The current latest release is `ghcr.io/hyperdxio/hyperdx:1.10.0-app` and is built with
   ```
    PORT=8080
    SERVER_URL=localhost:8000
@@ -44,9 +44,9 @@ From the root directory of the project run
 DOMAIN=https://hyperdx.mydomain.com
 IMAGE_REGISTRY=docker.io
 IMAGE_REPO=myuniquereponame/hyperdx
-IMAGE_TAG=1.9.0-app
+IMAGE_TAG=1.10.0-app
 docker build \
-  --build-arg CODE_VERSION=1.9.0 \
+  --build-arg CODE_VERSION=1.10.0 \
   --build-arg OTEL_EXPORTER_OTLP_ENDPOINT=$DOMAIN/collector \
   --build-arg OTEL_SERVICE_NAME="hdx-oss-app" \
   --build-arg PORT=8080 \
