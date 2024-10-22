@@ -1146,6 +1146,7 @@ aggregator:
     CLICKHOUSE_PASSWORD: aggregator
     CLICKHOUSE_USER: aggregator
     FRONTEND_URL: {{ include "hyperdx.app.publicUrl" . }} 
+    HYPERDX_API_KEY: {{ .Values.apiKey }}
     HYPERDX_LOG_LEVEL: {{ .Values.logLevel }}
     MONGO_URI: {{ include "hyperdx.mongodb.uri" . }} 
     NODE_ENV: development
