@@ -1141,6 +1141,7 @@ aggregator:
   ## @param aggregator.defaultConfig [string] Default configuration for the Hyperdx aggregator service
   ##
   defaultConfig: |
+    AGGREGATOR_PAYLOAD_SIZE_LIMIT: "144mb"
     APP_TYPE: "aggregator"
     CLICKHOUSE_HOST: {{ include "hyperdx.clickhouse.host" . }}
     CLICKHOUSE_PASSWORD: aggregator
